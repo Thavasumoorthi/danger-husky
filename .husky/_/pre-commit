@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/husky.sh"
+
+# Run Danger and capture output
+OUTPUT=$(npx danger local)
+
+# Show any failure message in the console
+echo "$OUTPUT"
+
+# FAIL_MESSAGES=$(echo "$OUTPUT" | grep "❌")
+
+# echo "$FAIL_MESSAGES"
+
+
+# Check if any fail message is found in the output
+if echo "$OUTPUT" | grep -q "❌"; then
+  # If a fail message is found, abort the commit
+  exit 1
+fi
